@@ -46,13 +46,39 @@ public class Controleur extends HttpServlet {
 		List<Produit> liste  = gestion.getAllProducts(); 
 		request.setAttribute("products", liste);
 		request.getRequestDispatcher("index2.jsp").forward(request, response);
+		
 			}
+			
+			
+			else if (action.equalsIgnoreCase("editPage"))
+			{
+				int id = Integer.parseInt(request.getParameter("id"));
+				String nom = request.getParameter("nom");
+				Double prix = Double.parseDouble(request.getParameter("prix"));
+				int qte = Integer.parseInt(request.getParameter("qte"));
+				request.setAttribute("nom", nom);
+				request.setAttribute("prix", prix);
+				request.setAttribute("qte", qte);
+				request.setAttribute("prodid", id);
+				request.getRequestDispatcher("edit.jsp").forward(request, response);
+			}
+			
+			else if(action.equalsIgnoreCase("addPage"))
+			{
+				request.getRequestDispatcher("add.jsp").forward(request, response);
+			}
+			
+			
+			
+			
 			else if(action.equalsIgnoreCase("rechercher"))
 			{
 				String mc = request.getParameter("mc");
 				request.setAttribute("products", gestion.getProductByMc(mc));
 				request.getRequestDispatcher("index2.jsp").forward(request, response);
 			}
+			
+			
 			else if(action.equalsIgnoreCase("delete"))
 			{
 				
@@ -64,15 +90,35 @@ public class Controleur extends HttpServlet {
 			}
 			
 			
-			else if(action.equalsIgnoreCase("edit"))
+			else if(action.equalsIgnoreCase("add"))
 			{
+				Produit pd = new Produit();
+				pd.setNom(request.getParameter("nom"));
+				pd.setPrix(Double.parseDouble(request.getParameter("prix")));
+				pd.setQte(Integer.parseInt(request.getParameter("qte")));
+				gestion.addProduit(pd);
+				request.setAttribute("products", gestion.getAllProducts());
+				request.getRequestDispatcher("index2.jsp").forward(request, response);
+				
+				
+				
 				
 			}
 			
-			else if(action.equalsIgnoreCase("add"))
+			else if(action.equalsIgnoreCase("edit"))
 			{
 				
+				int id = Integer.parseInt(request.getParameter("id"));
+				String nom = request.getParameter("nom");
+				int qte = Integer.parseInt(request.getParameter("qte"));
+				Double prix = Double.parseDouble(request.getParameter("prix"));
+				Produit pd = new Produit(id,nom,prix,qte);
+				gestion.updateProduct(pd);
+				request.setAttribute("products", gestion.getAllProducts());
+				request.getRequestDispatcher("index2.jsp").forward(request, response);
 			}
+			
+			
 			
 
 			

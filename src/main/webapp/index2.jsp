@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container">
-<div class="card">
+<div class="card text-center">
 	<div class="card-header">
 		<h2>Liste des Produits</h2>	
 	</div>
@@ -21,13 +21,15 @@
 	
 	
 	<form class="form-inline" method="get" action="Controleur">
-  <div class="form-group mb-2">
-    <label for="mot">Mot clé: </label>
-    <input type="text" id="mot" name="mc">
-    <button type="submit" name="action" value="rechercher" class="btn btn-primary mx-2 fa fa-search"></button>
-    
-  </div>
-</form>
+  		<div class="form-group mb-2">
+    		<label for="mot"><b>Mot clé:</b> </label>
+    		<input type="text" id="mot" name="mc">
+    		<button type="submit" name="action" value="rechercher" class="btn btn-primary mx-2 fa fa-search"></button>		  		
+  		</div>
+  		<div style="text-align: left; margin-left: 33px;">
+  			<a href="Controleur?&action=addPage" class="btn btn-info fa fa-add"></a>
+  		</div>
+	</form>
 
 
 		<table class="table">
@@ -35,7 +37,7 @@
 		<th>#</th>
 		<th>Nom</th>
 		<th>Prix</th>
-		<th>quantite</th>
+		<th>Quantite</th>
 		<th>Action</th>
 	</tr>
 		<c:forEach items="${products}" var="p">
@@ -45,9 +47,10 @@
 			<td>${p.prix}</td>
 			<td>${p.qte}</td>
 			<td>
-			<a href="Controleur?id=${p.id}&action=delete" class="btn btn-danger fa fa-trash">
-			<a href="Controleur?id=${p.id}&action=edit" class="btn btn-warning fa fa-edit">
-				
+				<div>
+					<a href="Controleur?id=${p.id}&action=delete" class="btn btn-danger fa fa-trash"></a>
+					<a href="Controleur?id=${p.id}&nom=${p.nom}&prix=${p.prix}&qte=${p.qte}&action=editPage" class="btn btn-warning fa fa-edit"></a>
+				</div>	
 			</td>
 		</tr>
 		</c:forEach>
