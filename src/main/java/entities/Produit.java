@@ -1,11 +1,21 @@
 package entities;
 
-public class Produit {
+import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+@Entity
+public class Produit {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String nom;
 	private int qte;
 	private double prix;
+	@ManyToOne
+	private Categorie categorie;
 	
 	public Produit(int id, String nom, double prix, int qte) {
 		this.id = id;

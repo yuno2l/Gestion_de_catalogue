@@ -19,7 +19,7 @@ public class Controleur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
-     * @see HttpServlet#HttpServlet()
+     * @see HttpServlet#HttpServlet()	
      */
     public Controleur() {
         super();
@@ -31,7 +31,7 @@ public class Controleur extends HttpServlet {
 	 */
     IGestionProduit gestion;
 	public void init(ServletConfig config) throws ServletException {
-		gestion = new GestionProduit();
+		gestion = new GestionCatalogueImplJPA();
 	}
 
 	/**
