@@ -46,6 +46,20 @@
 			    			<input type="number" min="0" id="q" name="qte" value="${qte}" >
 		    			</div>
 		    		</div>
+		    		
+		    		<div class="form-group row">
+		    		<label for="categorie" class="col-sm-2 col-form-label">Categorie: </label>
+		    		<div class="col-sm-10">
+		    			<select name="categorie">
+		    				<c:forEach items="${categorie}" var="c">
+		    				
+					        <option value=${c.id} <c:if test="${produit.categorie.id==c.id}">selected="true"</c:if>>${c.nom}</option>
+					        
+					        </c:forEach>
+      					</select>
+		    		</div>
+		    	</div>
+		    		
 		    		<div style="margin-left: 23%">
     					<button type="submit" name="action" value="edit" class="btn btn-primary mb-2">Sauvegarder</button>
 		    		</div>

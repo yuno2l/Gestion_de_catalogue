@@ -31,6 +31,15 @@ public class Produit {
 		this.qte = qte;
 	}
 	
+public Produit(int id, String nom, double prix, int qte, Categorie categorie) {
+	
+		this.id =  id;
+		this.nom = nom;
+		this.prix = prix;
+		this.qte = qte;
+		this.categorie = categorie;
+	}
+	
 	public Produit() {
 		super();
 	}
@@ -59,5 +68,14 @@ public class Produit {
 	public void setPrix(double prix) {
 		this.prix = prix;
 	}
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+	
 
 }

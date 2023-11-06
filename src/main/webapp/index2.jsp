@@ -38,7 +38,9 @@
 		<th>Nom</th>
 		<th>Prix</th>
 		<th>Quantite</th>
+		<th>Categorie</th>
 		<th>Action</th>
+		
 	</tr>
 		<c:forEach items="${products}" var="p">
 		<tr>
@@ -46,6 +48,7 @@
 			<td>${p.nom}</td>
 			<td>${p.prix}</td>
 			<td>${p.qte}</td>
+			<td>${p.categorie.nom}</td>
 			<td>
 				<div>
 					<a href="Controleur?id=${p.id}&action=delete" class="btn btn-danger fa fa-trash"></a>

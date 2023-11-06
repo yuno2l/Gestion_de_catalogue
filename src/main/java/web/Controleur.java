@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import DAO.*;
-
+import entities.Categorie;
 import entities.Produit;/**
  * Servlet implementation class Controleur
  */
@@ -30,9 +30,11 @@ public class Controleur extends HttpServlet {
 	 * @see Servlet#init(ServletConfig)
 	 */
     IGestionProduit gestion;
+    IGestionCategorie cat;
 	public void init(ServletConfig config) throws ServletException {
 		gestion = new GestionCatalogueImplJPA();
-	}
+		cat = new GestionCategorieImpl()	;
+				}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -52,6 +54,7 @@ public class Controleur extends HttpServlet {
 			
 			else if (action.equalsIgnoreCase("editPage"))
 			{
+				request.setAttribute("categorie", cat.getAllCategories());	
 				int id = Integer.parseInt(request.getParameter("id"));
 				String nom = request.getParameter("nom");
 				Double prix = Double.parseDouble(request.getParameter("prix"));
@@ -65,6 +68,8 @@ public class Controleur extends HttpServlet {
 			
 			else if(action.equalsIgnoreCase("addPage"))
 			{
+				
+				request.setAttribute("categorie", cat.getAllCategories());
 				request.getRequestDispatcher("add.jsp").forward(request, response);
 			}
 			
@@ -96,6 +101,7 @@ public class Controleur extends HttpServlet {
 				pd.setNom(request.getParameter("nom"));
 				pd.setPrix(Double.parseDouble(request.getParameter("prix")));
 				pd.setQte(Integer.parseInt(request.getParameter("qte")));
+				pd.setCategorie(cat.getCategorie(Integer.parseInt(request.getParameter("categorie"))));
 				gestion.addProduit(pd);
 				request.setAttribute("products", gestion.getAllProducts());
 				request.getRequestDispatcher("index2.jsp").forward(request, response);
@@ -112,7 +118,8 @@ public class Controleur extends HttpServlet {
 				String nom = request.getParameter("nom");
 				int qte = Integer.parseInt(request.getParameter("qte"));
 				Double prix = Double.parseDouble(request.getParameter("prix"));
-				Produit pd = new Produit(id,nom,prix,qte);
+				Categorie categorie = cat.getCategorie(Integer.parseInt(request.getParameter("categorie")));
+				Produit pd = new Produit(id,nom,prix,qte,categorie);
 				gestion.updateProduct(pd);
 				request.setAttribute("products", gestion.getAllProducts());
 				request.getRequestDispatcher("index2.jsp").forward(request, response);
