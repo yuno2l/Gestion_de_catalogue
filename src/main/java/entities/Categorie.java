@@ -37,8 +37,12 @@ public class Categorie {
 	public Categorie() {
 		
 	}
-public Categorie(String nom) {
-		
+	public Categorie(String nom) {
+		this.nom = nom;
 	}
 	
+	public Categorie(int id,String nom) {
+		this.nom = nom;
+		this.id = id;
+	}
 }

@@ -9,12 +9,13 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import entities.Categorie;
+import entities.Produit;
 
 public class GestionCategorieImpl implements IGestionCategorie {
 	EntityManagerFactory emf=Persistence.createEntityManagerFactory("formation");
 	EntityManager em=emf.createEntityManager();
 
-	
+	@Override
 	public void addCategorie(Categorie c) {
 		EntityTransaction et = em.getTransaction();
 		et.begin();
@@ -23,22 +24,38 @@ public class GestionCategorieImpl implements IGestionCategorie {
 		
 	}
 
-	
+	@Override
 	public List<Categorie> getAllCategories() {
 		Query q = em.createQuery("select c from Categorie c");
 		
 		return q.getResultList();
 	}
 
-	
+	@Override
 	public Categorie getCategorie(int id) {
 		return em.find(Categorie.class, id);
 	}
 
-	
+	@Override
 	public void deleteCategorie(int id) {
 		em.getTransaction().begin();
 		em.remove(getCategorie(id));
+		em.getTransaction().commit();	
+	}
+	
+	@Override
+	public List<Produit> getCategorieByMc(String mc) {
+		Query q = em.createQuery("select p from Categorie p where p.nom like :x");
+		q.setParameter("x","%"+mc+"%");
+		
+		return q.getResultList();
+	}
+	
+	
+	@Override
+	public void updateCategorie(Categorie p) {
+		em.getTransaction().begin();
+		em.merge(p);
 		em.getTransaction().commit();
 	}
 	

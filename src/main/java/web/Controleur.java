@@ -83,6 +83,37 @@ public class Controleur extends HttpServlet {
 				request.getRequestDispatcher("index2.jsp").forward(request, response);
 			}
 			
+			else if(action.equalsIgnoreCase("rechercherCat"))
+			{
+				String mc = request.getParameter("mc");
+				request.setAttribute("categorie", cat.getCategorieByMc(mc));
+				request.getRequestDispatcher("categorie.jsp").forward(request, response);
+			}
+			
+			
+			else if(action.equalsIgnoreCase("deleteCat"))
+			{
+				int idCat = Integer.parseInt( request.getParameter("id"));
+				cat.deleteCategorie(idCat);
+				request.setAttribute("categorie", cat.getAllCategories());
+				request.getRequestDispatcher("categorie.jsp").forward(request, response);
+			}
+			
+			else if(action.equalsIgnoreCase("addCatPage"))
+			{
+				request.getRequestDispatcher("addCatPage.jsp").forward(request, response);
+			}
+			
+			else if(action.equalsIgnoreCase("addCat"))
+			{
+				String nomCat = request.getParameter("nom");
+				Categorie c1 = new Categorie(nomCat);
+				cat.addCategorie(c1);
+				request.setAttribute("categorie", cat.getAllCategories());
+				request.getRequestDispatcher("categorie.jsp").forward(request, response);
+			}
+			
+			
 			
 			else if(action.equalsIgnoreCase("delete"))
 			{
@@ -91,6 +122,7 @@ public class Controleur extends HttpServlet {
 				gestion.deleteProduct(id);
 				request.setAttribute("products", gestion.getAllProducts());
 				request.getRequestDispatcher("index2.jsp").forward(request, response);
+
 
 			}
 			
@@ -123,6 +155,35 @@ public class Controleur extends HttpServlet {
 				gestion.updateProduct(pd);
 				request.setAttribute("products", gestion.getAllProducts());
 				request.getRequestDispatcher("index2.jsp").forward(request, response);
+			}
+			
+			
+			else if (action.equalsIgnoreCase("editCatPage"))
+			{
+				int id = Integer.parseInt(request.getParameter("id"));
+				String nom = request.getParameter("nom");
+				request.setAttribute("nom", nom);
+				request.setAttribute("id", id);
+				request.getRequestDispatcher("editCatPage.jsp").forward(request, response);
+			}
+			
+			else if(action.equalsIgnoreCase("editCat"))
+			{
+				
+				int id = Integer.parseInt(request.getParameter("id"));
+				String nom = request.getParameter("nom");
+				Categorie c2 = new Categorie(id,nom);
+				cat.updateCategorie(c2);
+				request.setAttribute("categorie", cat.getAllCategories());
+				request.getRequestDispatcher("categorie.jsp").forward(request, response);
+			}
+			
+			
+			
+			else if(action.equalsIgnoreCase("pageCategorie"))
+			{
+				request.setAttribute("categorie", cat.getAllCategories());
+				request.getRequestDispatcher("categorie.jsp").forward(request, response);
 			}
 			
 			
