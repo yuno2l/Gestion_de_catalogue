@@ -8,6 +8,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import com.isitcom.formationSpringboot.demo1.services.IGestionCategorie;
+
 import entities.Categorie;
 import entities.Produit;
 

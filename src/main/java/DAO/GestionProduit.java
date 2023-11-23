@@ -3,6 +3,8 @@ package DAO;
 import java.sql.*;
 import java.util.*;
 
+import com.isitcom.formationSpringboot.demo1.services.IGestionProduit;
+
 import entities.Produit;
 
 public class GestionProduit implements IGestionProduit {

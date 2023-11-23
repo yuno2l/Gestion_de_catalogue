@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+
+import com.isitcom.formationSpringboot.demo1.services.IGestionProduit;
+
 import javax.persistence.*;
 
 import entities.Produit;
